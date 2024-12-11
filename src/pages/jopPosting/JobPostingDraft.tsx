@@ -38,6 +38,8 @@ const JobPostingDraft = () => {
         },
       },
       experience: "",
+      expStart: "",
+      expEnd: "",
       employment_type: "",
       work_hours: {
         work_hours_per_week: "",
@@ -46,6 +48,7 @@ const JobPostingDraft = () => {
         restTimeStart: "",
         restTimeEnd: "",
         deal: false,
+        detail: false,
       },
       place: "",
       endPayType: "",
@@ -73,7 +76,7 @@ const JobPostingDraft = () => {
       education2: reqData.education2,
       // wage_type: "",
       wage: {
-        wage_type: reqData.wage.wageType,
+        wage_type: reqData.wage.wage_type,
         wage_low: reqData.wage.wage_low,
         wage_high: reqData.wage.wage_high,
         deal: reqData.wage.deal,
@@ -92,6 +95,7 @@ const JobPostingDraft = () => {
         restTimeStart: reqData.work_hours.restTimeStart,
         restTimeEnd: reqData.work_hours.restTimeEnd,
         deal: reqData.work_hours.deal,
+        detail: reqData.work_hours.detail,
       },
       place: reqData.place,
       endPayType: reqData.endPayType,
@@ -227,9 +231,17 @@ const JobPostingDraft = () => {
                   <div>
                     <span>
                       (최소{" "}
-                      <input type="text" className={jobPostingStyles.tdInput} />{" "}
+                      <input
+                        type="text"
+                        className={jobPostingStyles.tdInput}
+                        {...register("expStart")}
+                      />{" "}
                       년{" "}
-                      <input type="text" className={jobPostingStyles.tdInput} />{" "}
+                      <input
+                        type="text"
+                        className={jobPostingStyles.tdInput}
+                        {...register("expEnd")}
+                      />{" "}
                       개월) 이상
                     </span>
                   </div>
@@ -471,6 +483,13 @@ const JobPostingDraft = () => {
                       placeholder="0"
                       {...register("work_hours.restTimeEnd")}
                     />
+
+                    <input
+                      type="checkbox"
+                      {...register("work_hours.detail")}
+                      style={{ marginLeft: "5px" }}
+                    />
+                    <span> 근무 시간 협의 가능</span>
                   </div>
 
                   <div

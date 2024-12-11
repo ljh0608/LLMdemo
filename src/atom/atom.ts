@@ -11,4 +11,39 @@ export const resultAtom = atom({
     "Python 및 머신러닝 라이브러리 경험.",
     "뛰어난 의사소통 능력.",
   ],
+  education1: "",
+  education2: "",
+  education3: false,
+  // wage_type: "",
+  wage: {
+    wage_type: "선택",
+    wage_low: "",
+    wage_high: "",
+    deal: false,
+    etc: {
+      type: "",
+      percent: "",
+    },
+  },
+  experience: "",
+  expStart: "",
+  expEnd: "",
+  employment_type: "",
+  work_hours: {
+    work_hours_per_week: "",
+    start: "",
+    end: "",
+    restTimeStart: "",
+    restTimeEnd: "",
+    deal: false,
+    detail: false,
+  },
+  place: "",
+  endPayType: "",
+  socialEnsurance: [],
+
+  recruitmentType: [],
+  recruitmentDocsType: [],
 });
+
+//직무내용 10자이상
