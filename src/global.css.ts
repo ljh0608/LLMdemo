@@ -14,6 +14,7 @@ globalStyle("html, body", {
 
 globalStyle("input", {
   outline: "none",
+  margin: 0,
 });
 
 globalStyle("a", {

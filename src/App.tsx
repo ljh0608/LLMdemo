@@ -11,6 +11,7 @@ const App = () => {
   } = useForm();
 
   const [LLMAtom, setLLMAtom] = useAtom(resultAtom);
+  console.log(LLMAtom);
   const navigate = useNavigate();
   const onSubmit = async (reqData: any) => {
     console.log(reqData);
@@ -36,7 +37,6 @@ const App = () => {
       navigate("/jobPosting");
     } catch (error) {
       console.log("error");
-      navigate("/jobPosting");
     } finally {
       // setLoading(false);
     }
@@ -48,21 +48,21 @@ const App = () => {
         <h2>메뉴</h2>
         <ul className={styles.navList}>
           <li className={styles.navItem} onClick={() => navigate("/")}>
-            검색
-          </li>
-          <li className={styles.navItem} onClick={() => navigate("/preview")}>
-            미리보기
+            공고입력
           </li>
           <li
             className={styles.navItem}
             onClick={() => navigate("/jobPosting")}
           >
-            결과 확인
+            초안수정
+          </li>
+          <li className={styles.navItem} onClick={() => navigate("/preview")}>
+            미리보기
           </li>
         </ul>
       </nav>
       <div>
-        <h2 className={styles.mainText}>채용 공고 입력</h2>
+        <h2 className={styles.mainText}>AI 구인공고 작성지원</h2>
         <hr className={styles.hrStyle} />
 
         <form

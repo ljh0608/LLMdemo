@@ -1,6 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { colorDefault } from "../../theme.css";
-// import { colorDefault, font } from "../../theme.css";
+import { colorDefault, font } from "../../theme.css";
 
 export const container = style({
   padding: "20px 0",
@@ -9,8 +8,13 @@ export const container = style({
 export const table = style({
   width: "100%",
   borderCollapse: "collapse",
-  border: `1px solid ${colorDefault.mainGray}`,
+
   borderRadius: "8px",
+});
+
+export const tbodyStyle = style({
+  width: "100%",
+  border: `1px solid ${colorDefault.mainGray}`,
 });
 
 export const label = style({
@@ -45,14 +49,14 @@ export const select = style({
   margin: "5px",
   borderRadius: "4px",
   border: "1px solid #ccc",
-  width: "100%",
+  width: "200px",
   boxSizing: "border-box",
   borderBottom: `1px solid ${colorDefault.mainGray}`,
 });
 
 export const trStyle = style({
   borderBottom: `1px solid ${colorDefault.mainGray}`,
-  padding: "20px 0",
+
   height: "60px",
 });
 
@@ -64,11 +68,7 @@ export const formWrapper = style({
   display: "flex",
   flexDirection: "column",
 
-  // border: `1px solid ${colorDefault.mainGray}`,
   width: "960px",
-
-  // backgroundColor: colorDefault.backgroundGray,
-  // padding: "20px 0",
 });
 
 export const btnStyle = style({
@@ -84,3 +84,38 @@ export const btnStyle = style({
 
   marginTop: "10px",
 });
+
+export const tdFlexStyle = style({
+  display: "flex",
+
+  alignItems: "center",
+  padding: "10px",
+  height: "100%",
+  textAlign: "center",
+
+  gap: "12px",
+});
+
+export const tdFlexColumnStyle = style({
+  display: "flex",
+  flexDirection: "column",
+  padding: "10px",
+  height: "100%",
+
+  gap: "6px",
+});
+
+export const tdInput = style({
+  padding: "8px",
+  margin: "5px",
+  borderRadius: "4px",
+  border: `1px solid #ccc`,
+});
+
+export const subText = style({
+  fontFamily: font.p2,
+  color: colorDefault.fontGray,
+  marginLeft: "6px",
+});
+
+// export const td;
