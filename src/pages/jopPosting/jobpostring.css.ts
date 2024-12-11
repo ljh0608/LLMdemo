@@ -57,7 +57,7 @@ export const select = style({
 export const trStyle = style({
   borderBottom: `1px solid ${colorDefault.mainGray}`,
 
-  height: "60px",
+  height: "40px",
 });
 
 export const formWrapper = style({
