@@ -4,7 +4,6 @@ import { colorDefault, font } from "./theme.css";
 export const appWrapper = style({
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
 
   width: "100%",
   color: "black",
@@ -13,6 +12,8 @@ export const appWrapper = style({
 export const navWrapper = style({
   padding: "10px",
   width: "200px",
+  position: "relative",
+  top: "70px",
 });
 
 export const navList = style({
@@ -42,6 +43,10 @@ export const hrStyle = style({
   width: "960px",
 });
 
+export const formStyle = style({
+  position: "absolute",
+});
+
 export const formWrapper = style({
   boxSizing: "border-box",
   marginTop: "20px",
@@ -52,33 +57,44 @@ export const formWrapper = style({
 
   border: `1px solid ${colorDefault.mainGray}`,
   width: "960px",
-  borderRadius: "8px",
-  backgroundColor: colorDefault.backgroundGray,
-  padding: "20px",
+
+  // backgroundColor: colorDefault.backgroundGray,
 });
 
 export const inputWrapper = style({
   display: "flex",
-
-  padding: "12px 0",
+  borderBottom: `1px solid ${colorDefault.mainGray}`,
+  // padding: "12px 10px",
   alignItems: "center",
   height: "65px",
   width: "100%",
+  border: "",
 });
 
 export const labelStyle = style({
-  display: "block",
-  width: "140px",
+  display: "flex",
+  width: "200px",
+
+  height: "100%",
+  alignItems: "center",
+  backgroundColor: colorDefault.backgroundGray,
+  paddingLeft: "20px",
 });
 
 export const inputStyle = style({
-  width: "100%",
-  height: "40px",
-  padding: "0 26px 0 8px",
+  width: "75%",
+  // height: "40px",
+  // padding: "0 26px 0 8px",
+  // borderRadius: "4px",
+  // border: `1px solid ${colorDefault.btn}`,
+  // color: colorDefault.h,
+  // fontSize: font.p1,
+  padding: "8px",
+  margin: "5px",
   borderRadius: "4px",
-  border: `1px solid ${colorDefault.btn}`,
-  color: colorDefault.h,
-  fontSize: font.p1,
+  border: "1px solid #ccc",
+
+  boxSizing: "border-box",
   // vertical-align: top;
 });
 
@@ -92,4 +108,6 @@ export const btnStyle = style({
   borderRadius: "8px",
   fontWeight: 600,
   color: "white",
+  position: "absolute",
+  right: 0,
 });
