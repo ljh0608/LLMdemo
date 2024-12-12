@@ -18,125 +18,87 @@ const App = () => {
   const navigate = useNavigate();
 
   const onsubmit = async (reqData: any) => {
-    // console.log(errors);
-    // if (Object.keys(errors).length > 0) {
-    //   console.log(errors);
-    //   const errorMessages = Object.values(errors)
-    //     .map((error) => error?.message)
-    //     .filter(Boolean)
-    //     .join("\n");
-    //   alert(`유효성 검사 오류:\n${errorMessages}`);
-    //   return;
-    // }
-    // console.log(reqData);
-    // alert("onSubmit 실행");
-    // try {
-    setIsLoading(true);
-    const response = await fetch(
-      "http://222.109.225.98:7878/generate-job-posting",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reqData),
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        "http://222.109.225.98:7878/generate-job-posting",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reqData),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+
+        throw new Error(errorData.detail[0].msg || "An error occurred.");
       }
-    );
 
-    // if (!response.ok) {
-    //   // console.log(response.body);
-    //   // console.log(response);
-    //   throw new Error("API request failed");
-    // }
-
-    const data = await response.json();
-
-    const errorDetails = await response.json().catch(() => null); // Try to parse error details, fallback to null
-
-    if (errorDetails?.detail && Array.isArray(errorDetails.detail)) {
-      const detailedMessages = errorDetails.detail
-        .map((err: any) => `\u2022 ${err.msg}`) // Format as bullet points
-        .join("\n");
-
-      throw new Error(`${detailedMessages}`);
+      const data = await response.json();
+      setIsLoading(false);
+      setLLMAtom((prev) => ({
+        ...prev,
+        ...data,
+      }));
+      navigate("/jobPosting");
+    } catch (error) {
+      alert(`Error: ${error.message}`);
     }
-    setIsLoading(false);
 
-    console.log(data);
-    // setLLMAtom(data);
-    setLLMAtom((prev) => ({
-      ...prev,
-      ...data,
-      // job_title: reqData.job_title,
-      // recommended_job: reqData.recommended_job,
-      // recommended_category: reqData.recommended_category,
-      // category_keywords: reqData.category_keywords,
-      // job_intro: reqData.job_intro,
-      // main_tasks: reqData.main_tasks,
-      // preferred_qualifications: reqData.preferred_qualifications,
+    //   try {
+    //     setIsLoading(true);
 
-      // experience: reqData.experience,
-      // expStart: reqData.expStart,
-      // expEnd: reqData.expEnd,
-      // education1: reqData.education1,
-      // education2: reqData.education2,
-      // // wage_type: "",
-      // wage: {
-      //   wage_type: reqData.wage.wage_type,
-      //   wage_low: reqData.wage.wage_low,
-      //   wage_high: reqData.wage.wage_high,
-      //   deal: reqData.wage.deal,
-      //   etc: {
-      //     type: reqData.wage.etc.type,
-      //     percent: reqData.wage.etc.percent,
-      //   },
-      // },
+    //     const response = await fetch(
+    //       "http://222.109.225.98:7878/generate-job-posting",
+    //       {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(reqData),
+    //       }
+    //     );
 
-      // employment_type: reqData.employment_type,
+    //     const data = await response.json();
 
-      // work_hours: {
-      //   work_hours_per_week: reqData.work_hours.work_hours_per_week,
-      //   start: reqData.work_hours.start,
-      //   end: reqData.work_hours.end,
-      //   restTimeStart: reqData.work_hours.restTimeStart,
-      //   restTimeEnd: reqData.work_hours.restTimeEnd,
-      //   deal: reqData.work_hours.deal,
-      //   detail: reqData.work_hours.detail,
-      // },
-      // place: reqData.place,
-      // endPayType: reqData.endPayType,
-      // socialEnsurance: reqData.socialEnsurance,
-      // employmentType: reqData.employmentType,
-      // recruitmentType: reqData.recruitmentType,
-      // recruitmentDocsType: reqData.recruitmentDocsType,
-    }));
-    navigate("/jobPosting");
-    // } catch (error) {
-    //   alert(error);
-    //   // console.log(error);
-    //   // console.log("에러핸들링" + JSON.stringify(error));
-    // }
+    //     setIsLoading(false);
+
+    //     // setLLMAtom(data);
+    //     setLLMAtom((prev) => ({
+    //       ...prev,
+    //       ...data,
+    //     }));
+    //     navigate("/jobPosting");
+    //   } catch (error) {
+    //     alert(error);
+    //     // console.log(error);
+    //     // console.log("에러핸들링" + JSON.stringify(error));
+    //   }
   };
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
-        <h2>잠시만 기다려주세요</h2>
-        <BeatLoader />
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         flexDirection: "column",
+  //         justifyContent: "center",
+  //         alignItems: "center",
+  //         width: "100vw",
+  //         height: "100vh",
+  //       }}
+  //     >
+  //       <h2>잠시만 기다려주세요</h2>
+  //       <BeatLoader />
+  //     </div>
+  //   );
 
   return (
     <div className={styles.appWrapper}>
+      {isLoading && <BeatLoader className={styles.loading} />}
       <nav className={styles.navWrapper}>
         <h2>메뉴</h2>
         <ul className={styles.navList}>

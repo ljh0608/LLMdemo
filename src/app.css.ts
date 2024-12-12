@@ -1,6 +1,13 @@
 import { style } from "@vanilla-extract/css";
 import { colorDefault, font } from "./theme.css";
 
+export const loading = style({
+  position: "absolute",
+  top: "20%",
+  left: "50%",
+  transform: "translate(-50%,-50%)",
+  zIndex: 999,
+});
 export const appWrapper = style({
   display: "flex",
   justifyContent: "center",
