@@ -155,12 +155,12 @@ const Preview = () => {
                     {data.main_tasks}
                   </td> */}
                   <td className={`${styles.tableCell} ${styles.tableInner}`}>
-                    {data.main_tasks?.split("*").map((task, index) => (
+                    {data.main_tasks?.split("-").map((task, index) => (
                       <span key={index}>
                         {index !== 0 ? (
                           <>
                             {" "}
-                            * {task}
+                            - {task}
                             <br />
                           </>
                         ) : (
@@ -172,13 +172,13 @@ const Preview = () => {
 
                   <td className={`${styles.tableCell} ${styles.tableInner}`}>
                     {data.preferred_qualifications
-                      ?.split("*")
+                      ?.split("-")
                       .map((task, index) => (
                         <span key={index}>
                           {index !== 0 ? (
                             <>
                               {" "}
-                              * {task}
+                              - {task}
                               <br />
                             </>
                           ) : (
