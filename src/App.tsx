@@ -45,6 +45,7 @@ const App = () => {
       }));
       navigate("/jobPosting");
     } catch (error) {
+      setIsLoading(false);
       alert(`Error: ${error.message}`);
     }
 
