@@ -1,10 +1,10 @@
 import { useAtom } from "jotai";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { BeatLoader } from "react-spinners";
 import * as styles from "./app.css";
 import { resultAtom } from "./atom/atom";
-
-import { useState } from "react";
 const App = () => {
   const {
     register,
@@ -62,7 +62,54 @@ const App = () => {
     }
     setIsLoading(false);
 
-    setLLMAtom(data);
+    console.log(data);
+    // setLLMAtom(data);
+    setLLMAtom((prev) => ({
+      ...prev,
+      ...data,
+      // job_title: reqData.job_title,
+      // recommended_job: reqData.recommended_job,
+      // recommended_category: reqData.recommended_category,
+      // category_keywords: reqData.category_keywords,
+      // job_intro: reqData.job_intro,
+      // main_tasks: reqData.main_tasks,
+      // preferred_qualifications: reqData.preferred_qualifications,
+
+      // experience: reqData.experience,
+      // expStart: reqData.expStart,
+      // expEnd: reqData.expEnd,
+      // education1: reqData.education1,
+      // education2: reqData.education2,
+      // // wage_type: "",
+      // wage: {
+      //   wage_type: reqData.wage.wage_type,
+      //   wage_low: reqData.wage.wage_low,
+      //   wage_high: reqData.wage.wage_high,
+      //   deal: reqData.wage.deal,
+      //   etc: {
+      //     type: reqData.wage.etc.type,
+      //     percent: reqData.wage.etc.percent,
+      //   },
+      // },
+
+      // employment_type: reqData.employment_type,
+
+      // work_hours: {
+      //   work_hours_per_week: reqData.work_hours.work_hours_per_week,
+      //   start: reqData.work_hours.start,
+      //   end: reqData.work_hours.end,
+      //   restTimeStart: reqData.work_hours.restTimeStart,
+      //   restTimeEnd: reqData.work_hours.restTimeEnd,
+      //   deal: reqData.work_hours.deal,
+      //   detail: reqData.work_hours.detail,
+      // },
+      // place: reqData.place,
+      // endPayType: reqData.endPayType,
+      // socialEnsurance: reqData.socialEnsurance,
+      // employmentType: reqData.employmentType,
+      // recruitmentType: reqData.recruitmentType,
+      // recruitmentDocsType: reqData.recruitmentDocsType,
+    }));
     navigate("/jobPosting");
     // } catch (error) {
     //   alert(error);
@@ -70,6 +117,23 @@ const App = () => {
     //   // console.log("에러핸들링" + JSON.stringify(error));
     // }
   };
+
+  if (isLoading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <h2>잠시만 기다려주세요</h2>
+        <BeatLoader />
+      </div>
+    );
 
   return (
     <div className={styles.appWrapper}>

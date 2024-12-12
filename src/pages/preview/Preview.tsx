@@ -5,7 +5,7 @@ import * as style from "./../../app.css.ts";
 import * as styles from "./styles.css.ts";
 const Preview = () => {
   const [data, setData] = useAtom(resultAtom);
-
+  console.log(data);
   const navigate = useNavigate();
 
   const onSubmit = () => {
@@ -155,12 +155,12 @@ const Preview = () => {
                     {data.main_tasks}
                   </td> */}
                   <td className={`${styles.tableCell} ${styles.tableInner}`}>
-                    {data.main_tasks?.split("-").map((task, index) => (
+                    {data.main_tasks?.split("*").map((task, index) => (
                       <span key={index}>
                         {index !== 0 ? (
                           <>
                             {" "}
-                            - {task}
+                            * {task}
                             <br />
                           </>
                         ) : (
@@ -172,13 +172,13 @@ const Preview = () => {
 
                   <td className={`${styles.tableCell} ${styles.tableInner}`}>
                     {data.preferred_qualifications
-                      ?.split("-")
+                      ?.split("*")
                       .map((task, index) => (
                         <span key={index}>
                           {index !== 0 ? (
                             <>
                               {" "}
-                              - {task}
+                              * {task}
                               <br />
                             </>
                           ) : (
@@ -208,7 +208,7 @@ const Preview = () => {
               <div className={styles.row}>
                 <span className={styles.label}>학력</span>
                 <span>
-                  {data.education3 ? (
+                  {!data.education3 ? (
                     <span>
                       {" "}
                       {data.education1} ~ {data.education2}

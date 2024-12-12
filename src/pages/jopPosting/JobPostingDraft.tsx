@@ -7,6 +7,7 @@ import * as styles from "./../../app.css";
 import * as jobPostingStyles from "./jobpostring.css";
 const JobPostingDraft = () => {
   const [LLMAtom, setLLMAtom] = useAtom(resultAtom);
+  console.log(LLMAtom);
   const navigate = useNavigate();
   const {
     register,
@@ -23,39 +24,40 @@ const JobPostingDraft = () => {
       preferred_qualifications: LLMAtom.preferred_qualifications,
       //이후 추가
 
-      education1: "",
-      education2: "",
-      education3: false,
-      // wage_type: "",
+      education1: LLMAtom.education1,
+      education2: LLMAtom.education2,
+      education3: LLMAtom.education3,
+
       wage: {
-        wage_type: "",
-        wage_low: "",
-        wage_high: "",
-        deal: false,
+        wage_type: LLMAtom.wage.wage_type && "",
+        wage_low: LLMAtom.wage.wage_low && "",
+        wage_high: LLMAtom.wage.wage_high && "",
+        deal: LLMAtom.wage.deal && "",
         etc: {
-          type: "",
-          percent: "",
+          type: LLMAtom.wage.etc.type && "",
+          percent: LLMAtom.wage.etc.percent && "",
         },
       },
-      experience: "",
-      expStart: "",
-      expEnd: "",
-      employment_type: "",
-      work_hours: {
-        work_hours_per_week: "",
-        start: "",
-        end: "",
-        restTimeStart: "",
-        restTimeEnd: "",
-        deal: false,
-        detail: false,
-      },
-      place: "",
-      endPayType: "",
-      socialEnsurance: [],
 
-      recruitmentType: [],
-      recruitmentDocsType: [],
+      experience: LLMAtom.experience,
+      expStart: LLMAtom.expStart,
+      expEnd: LLMAtom.expEnd,
+      employment_type: LLMAtom.employment_type,
+      work_hours: {
+        work_hours_per_week: LLMAtom.work_hours.work_hours_per_week,
+        start: LLMAtom.work_hours.start,
+        end: LLMAtom.work_hours.end,
+        restTimeStart: LLMAtom.work_hours.restTimeStart,
+        restTimeEnd: LLMAtom.work_hours.restTimeEnd,
+        deal: LLMAtom.work_hours.deal,
+        detail: LLMAtom.work_hours.detail,
+      },
+      place: LLMAtom.place,
+      endPayType: LLMAtom.endPayType,
+      socialEnsurance: LLMAtom.socialEnsurance,
+
+      recruitmentType: LLMAtom.recruitmentType,
+      recruitmentDocsType: LLMAtom.recruitmentDocsType,
     },
   });
 
@@ -73,6 +75,8 @@ const JobPostingDraft = () => {
       preferred_qualifications: reqData.preferred_qualifications,
 
       experience: reqData.experience,
+      expStart: reqData.expStart,
+      expEnd: reqData.expEnd,
       education1: reqData.education1,
       education2: reqData.education2,
       // wage_type: "",
