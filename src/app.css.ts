@@ -101,9 +101,9 @@ export const inputStyle = style({
 export const btnStyle = style({
   // position: "relative",
   backgroundColor: colorDefault.mainBlue,
-  padding: "10px",
+  padding: "12px",
   marginLeft: "auto",
-  width: "65px",
+
   border: "none",
   borderRadius: "8px",
   fontWeight: 600,

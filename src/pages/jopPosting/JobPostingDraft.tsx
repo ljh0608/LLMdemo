@@ -28,7 +28,7 @@ const JobPostingDraft = () => {
       education3: false,
       // wage_type: "",
       wage: {
-        wage_type: "선택",
+        wage_type: "",
         wage_low: "",
         wage_high: "",
         deal: false,
@@ -61,6 +61,7 @@ const JobPostingDraft = () => {
 
   const updateInfo = (reqData: any) => {
     console.log(reqData);
+
     setLLMAtom((prev) => ({
       ...prev,
       job_title: reqData.job_title,
@@ -86,7 +87,7 @@ const JobPostingDraft = () => {
         },
       },
 
-      employment_type: reqData.wage.employment_type,
+      employment_type: reqData.employment_type,
 
       work_hours: {
         work_hours_per_week: reqData.work_hours.work_hours_per_week,
@@ -104,6 +105,8 @@ const JobPostingDraft = () => {
       recruitmentType: reqData.recruitmentType,
       recruitmentDocsType: reqData.recruitmentDocsType,
     }));
+
+    navigate("/preview");
   };
 
   return (
@@ -116,6 +119,7 @@ const JobPostingDraft = () => {
           </li>
           <li
             className={styles.navItem}
+            style={{ fontWeight: "600" }}
             onClick={() => navigate("/jobPosting")}
           >
             초안수정
@@ -126,7 +130,7 @@ const JobPostingDraft = () => {
         </ul>
       </nav>
       <div>
-        <h2 className={styles.mainText}>채용 공고 결과 확인</h2>
+        <h2 className={styles.mainText}>초안수정</h2>
         <hr className={styles.hrStyle} />
 
         <form
@@ -188,9 +192,8 @@ const JobPostingDraft = () => {
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>주요 업무</td>
                 <td>
-                  <input
-                    className={jobPostingStyles.input}
-                    type="text"
+                  <textarea
+                    className={jobPostingStyles.textarea}
                     {...register("main_tasks")}
                   />
                 </td>
@@ -201,9 +204,8 @@ const JobPostingDraft = () => {
               >
                 <td className={jobPostingStyles.label}>AI추천 우대사항</td>
                 <td>
-                  <input
-                    className={jobPostingStyles.input}
-                    type="text"
+                  <textarea
+                    className={jobPostingStyles.textarea}
                     {...register("preferred_qualifications")}
                   />
                 </td>
@@ -211,39 +213,41 @@ const JobPostingDraft = () => {
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>경력</td>
 
-                <td className={jobPostingStyles.tdFlexStyle}>
-                  <label htmlFor="신입" style={{ marginLeft: "5px" }}>
-                    신입
-                  </label>
-                  <input
-                    type="radio"
-                    id="신입"
-                    value="신입"
-                    {...register("experience")}
-                  />
-                  <label htmlFor="경력"> 경력</label>
-                  <input
-                    type="radio"
-                    id="경력"
-                    value="경력"
-                    {...register("experience")}
-                  />
-                  <div>
-                    <span>
-                      (최소{" "}
-                      <input
-                        type="text"
-                        className={jobPostingStyles.tdInput}
-                        {...register("expStart")}
-                      />{" "}
-                      년{" "}
-                      <input
-                        type="text"
-                        className={jobPostingStyles.tdInput}
-                        {...register("expEnd")}
-                      />{" "}
-                      개월) 이상
-                    </span>
+                <td className={jobPostingStyles.tdFlexColumnStyle}>
+                  <div className={jobPostingStyles.exprience}>
+                    <input
+                      type="radio"
+                      id="신입"
+                      value="신입"
+                      {...register("experience")}
+                    />
+                    <label htmlFor="신입">신입</label>
+                  </div>
+                  <div className={jobPostingStyles.exprience}>
+                    <input
+                      type="radio"
+                      id="경력"
+                      value="경력"
+                      {...register("experience")}
+                    />
+                    <label htmlFor="경력"> 경력</label>
+                    <div>
+                      <span>
+                        (최소{" "}
+                        <input
+                          type="text"
+                          className={jobPostingStyles.tdInput}
+                          {...register("expStart")}
+                        />{" "}
+                        년{" "}
+                        <input
+                          type="text"
+                          className={jobPostingStyles.tdInput}
+                          {...register("expEnd")}
+                        />{" "}
+                        개월) 이상
+                      </span>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -453,37 +457,158 @@ const JobPostingDraft = () => {
                   </div>
                   <div>
                     <span style={{ marginRight: "10px" }}>근무시간</span>
-                    <input
+                    {/* <input
                       className={jobPostingStyles.tdInput}
                       type="text"
                       placeholder="0"
                       {...register("work_hours.start")}
-                    />
+                    /> */}
+                    <select
+                      className={jobPostingStyles.select}
+                      {...register("work_hours.start")}
+                    >
+                      <option value="00:00">00:00</option>
+                      <option value="01:00">01:00</option>
+                      <option value="02:00">02:00</option>
+                      <option value="03:00">03:00</option>
+                      <option value="04:00">04:00</option>
+                      <option value="05:00">05:00</option>
+                      <option value="06:00">06:00</option>
+                      <option value="07:00">07:00</option>
+                      <option value="08:00">08:00</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                      <option value="22:00">22:00</option>
+                      <option value="23:00">23:00</option>
+                      <option value="24:00">24:00</option>
+                    </select>
                     <span> ~ </span>
-                    <input
+                    {/* <input
                       className={jobPostingStyles.tdInput}
                       type="text"
                       placeholder="0"
                       {...register("work_hours.end")}
-                    />
+                    /> */}
+                    <select
+                      className={jobPostingStyles.select}
+                      {...register("work_hours.end")}
+                    >
+                      <option value="00:00">00:00</option>
+                      <option value="01:00">01:00</option>
+                      <option value="02:00">02:00</option>
+                      <option value="03:00">03:00</option>
+                      <option value="04:00">04:00</option>
+                      <option value="05:00">05:00</option>
+                      <option value="06:00">06:00</option>
+                      <option value="07:00">07:00</option>
+                      <option value="08:00">08:00</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                      <option value="22:00">22:00</option>
+                      <option value="23:00">23:00</option>
+                      <option value="24:00">24:00</option>
+                    </select>
                   </div>
 
                   <div>
                     <span style={{ marginRight: "10px" }}>휴게시간</span>
-                    <input
+                    {/* <input
                       className={jobPostingStyles.tdInput}
                       type="text"
                       placeholder="0"
                       {...register("work_hours.restTimeStart")}
-                    />
+                    /> */}
+
+                    <select
+                      className={jobPostingStyles.select}
+                      {...register("work_hours.restTimeStart")}
+                    >
+                      <option value="00:00">00:00</option>
+                      <option value="01:00">01:00</option>
+                      <option value="02:00">02:00</option>
+                      <option value="03:00">03:00</option>
+                      <option value="04:00">04:00</option>
+                      <option value="05:00">05:00</option>
+                      <option value="06:00">06:00</option>
+                      <option value="07:00">07:00</option>
+                      <option value="08:00">08:00</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                      <option value="22:00">22:00</option>
+                      <option value="23:00">23:00</option>
+                      <option value="24:00">24:00</option>
+                    </select>
                     <span> ~ </span>
-                    <input
+                    {/* <input
                       className={jobPostingStyles.tdInput}
                       type="text"
                       placeholder="0"
                       {...register("work_hours.restTimeEnd")}
-                    />
+                    /> */}
 
+                    <select
+                      className={jobPostingStyles.select}
+                      {...register("work_hours.restTimeEnd")}
+                    >
+                      <option value="00:00">00:00</option>
+                      <option value="01:00">01:00</option>
+                      <option value="02:00">02:00</option>
+                      <option value="03:00">03:00</option>
+                      <option value="04:00">04:00</option>
+                      <option value="05:00">05:00</option>
+                      <option value="06:00">06:00</option>
+                      <option value="07:00">07:00</option>
+                      <option value="08:00">08:00</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                      <option value="22:00">22:00</option>
+                      <option value="23:00">23:00</option>
+                      <option value="24:00">24:00</option>
+                    </select>
                     <input
                       type="checkbox"
                       {...register("work_hours.detail")}
@@ -492,7 +617,7 @@ const JobPostingDraft = () => {
                     <span> 근무 시간 협의 가능</span>
                   </div>
 
-                  <div
+                  {/* <div
                     style={{
                       display: "flex",
                       gap: "6px",
@@ -505,7 +630,7 @@ const JobPostingDraft = () => {
                       * 일별 근무시간이 일정하지 않은 경우, [상세시간]선택 후
                       요일별 근무시간 및 휴게시간을 입력하세요
                     </span>
-                  </div>
+                  </div> */}
                 </td>
               </tr>
 
@@ -685,7 +810,7 @@ const JobPostingDraft = () => {
             </tbody>
           </table>
           <button className={jobPostingStyles.btnStyle} type="submit">
-            수정
+            미리보기
           </button>
         </form>
       </div>

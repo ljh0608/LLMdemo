@@ -74,9 +74,9 @@ export const formWrapper = style({
 export const btnStyle = style({
   // position: "relative",
   backgroundColor: colorDefault.mainBlue,
-  padding: "10px",
+  padding: "12px",
   marginLeft: "auto",
-  width: "65px",
+
   border: "none",
   borderRadius: "8px",
   fontWeight: 600,
@@ -119,3 +119,14 @@ export const subText = style({
 });
 
 // export const td;
+
+export const exprience = style({
+  display: "flex",
+
+  alignItems: "center",
+
+  height: "30px",
+  textAlign: "center",
+
+  gap: "12px",
+});
