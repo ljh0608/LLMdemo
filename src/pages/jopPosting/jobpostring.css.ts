@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { composeStyles, style } from "@vanilla-extract/css";
 import { colorDefault, font } from "../../theme.css";
 
 export const container = style({
@@ -129,4 +129,33 @@ export const exprience = style({
   textAlign: "center",
 
   gap: "12px",
+});
+
+export const copyBtn = style({
+  borderRadius: "4px",
+
+  width: "60px",
+  backgroundColor: `${colorDefault.backgroundGray}`,
+  border: `1px solid ${colorDefault.mainGray}`,
+  fontSize: `${font.p2}`,
+  height: "34px",
+});
+
+export const copyBtnWithMargin = composeStyles(
+  copyBtn,
+  style({
+    marginTop: "5px",
+  })
+);
+
+export const copyWrapper = style({
+  display: "flex",
+  alignItems: "center",
+  padding: "0 5px 0 0",
+});
+
+export const copyWrapperAlignStart = style({
+  display: "flex",
+
+  padding: "0 5px 0 0",
 });

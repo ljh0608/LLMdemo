@@ -12,6 +12,7 @@ const JobPostingDraft = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -60,6 +61,18 @@ const JobPostingDraft = () => {
       recruitmentDocsType: LLMAtom.recruitmentDocsType,
     },
   });
+
+  const watchAllFields = watch();
+
+  console.log(watchAllFields);
+  const handleCopyText = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("copied");
+    } catch (e) {
+      alert("copy failed");
+    }
+  };
 
   const updateInfo = (reqData: any) => {
     console.log(reqData);
@@ -145,61 +158,109 @@ const JobPostingDraft = () => {
             <tbody className={jobPostingStyles.tbodyStyle}>
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>채용 제목</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapper}>
                   <input
                     className={jobPostingStyles.input}
                     type="text"
                     {...register("job_title")}
                   />
+                  <button
+                    type="button"
+                    onClick={() => handleCopyText(watchAllFields.job_title)}
+                    className={jobPostingStyles.copyBtn}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>추천 직무</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapper}>
                   <input
                     className={jobPostingStyles.input}
                     type="text"
                     {...register("recommended_job")}
                   />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.recommended_job)
+                    }
+                    className={jobPostingStyles.copyBtn}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>추천 직종</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapper}>
                   <input
                     className={jobPostingStyles.input}
                     type="text"
                     {...register("recommended_category")}
                   />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.recommended_category)
+                    }
+                    className={jobPostingStyles.copyBtn}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
 
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>직종 키워드</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapper}>
                   <input
                     className={jobPostingStyles.input}
                     type="text"
                     {...register("category_keywords")}
                   />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.category_keywords)
+                    }
+                    className={jobPostingStyles.copyBtn}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>직무 소개</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapperAlignStart}>
                   <textarea
                     className={jobPostingStyles.textarea}
                     {...register("job_intro")}
                   ></textarea>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyText(watchAllFields.job_intro)}
+                    className={jobPostingStyles.copyBtnWithMargin}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
               <tr className={jobPostingStyles.trStyle}>
                 <td className={jobPostingStyles.label}>주요 업무</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapperAlignStart}>
                   <textarea
                     className={jobPostingStyles.textarea}
                     {...register("main_tasks")}
                   />
+                  <button
+                    type="button"
+                    onClick={() => handleCopyText(watchAllFields.main_tasks)}
+                    className={jobPostingStyles.copyBtnWithMargin}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
               <tr
@@ -207,11 +268,20 @@ const JobPostingDraft = () => {
                 // style={{ borderBottom: "none" }}
               >
                 <td className={jobPostingStyles.label}>AI추천 우대사항</td>
-                <td>
+                <td className={jobPostingStyles.copyWrapperAlignStart}>
                   <textarea
                     className={jobPostingStyles.textarea}
                     {...register("preferred_qualifications")}
                   />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.preferred_qualifications)
+                    }
+                    className={jobPostingStyles.copyBtnWithMargin}
+                  >
+                    복사하기
+                  </button>
                 </td>
               </tr>
               {/* <tr className={jobPostingStyles.trStyle}>
