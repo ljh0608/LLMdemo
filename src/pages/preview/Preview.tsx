@@ -4,7 +4,7 @@ import { resultAtom } from "../../atom/atom.ts";
 import * as style from "./../../app.css.ts";
 import * as styles from "./styles.css.ts";
 const Preview = () => {
-  const [data, setData] = useAtom(resultAtom);
+  const [data] = useAtom(resultAtom);
   console.log(data);
   const navigate = useNavigate();
 

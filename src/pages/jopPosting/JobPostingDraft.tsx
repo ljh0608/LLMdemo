@@ -9,56 +9,54 @@ const JobPostingDraft = () => {
   const [LLMAtom, setLLMAtom] = useAtom(resultAtom);
 
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: {
       job_title: LLMAtom.job_title,
-      recommended_job: LLMAtom.recommended_job,
+      recommended_occupation_main: LLMAtom.recommended_occupation_main,
+      recommended_occupation_sub: LLMAtom.recommended_occupation_sub,
       recommended_category: LLMAtom.recommended_category,
-      category_keywords: LLMAtom.category_keywords,
+      recommended_job: LLMAtom.recommended_job,
       job_intro: LLMAtom.job_intro,
       main_tasks: LLMAtom.main_tasks,
       preferred_qualifications: LLMAtom.preferred_qualifications,
+      search_keywords: LLMAtom.search_keywords,
+
       //이후 추가
 
-      education1: LLMAtom.education1,
-      education2: LLMAtom.education2,
-      education3: LLMAtom.education3,
+      // education1: LLMAtom.education1,
+      // education2: LLMAtom.education2,
+      // education3: LLMAtom.education3,
 
-      wage: {
-        wage_type: LLMAtom.wage.wage_type && "",
-        wage_low: LLMAtom.wage.wage_low && "",
-        wage_high: LLMAtom.wage.wage_high && "",
-        deal: LLMAtom.wage.deal && "",
-        etc: {
-          type: LLMAtom.wage.etc.type && "",
-          percent: LLMAtom.wage.etc.percent && "",
-        },
-      },
+      // wage: {
+      //   wage_type: LLMAtom.wage.wage_type && "",
+      //   wage_low: LLMAtom.wage.wage_low && "",
+      //   wage_high: LLMAtom.wage.wage_high && "",
+      //   deal: LLMAtom.wage.deal && "",
+      //   etc: {
+      //     type: LLMAtom.wage.etc.type && "",
+      //     percent: LLMAtom.wage.etc.percent && "",
+      //   },
+      // },
 
-      experience: LLMAtom.experience,
-      expStart: LLMAtom.expStart,
-      expEnd: LLMAtom.expEnd,
-      employment_type: LLMAtom.employment_type,
-      work_hours: {
-        work_hours_per_week: LLMAtom.work_hours.work_hours_per_week,
-        start: LLMAtom.work_hours.start,
-        end: LLMAtom.work_hours.end,
-        restTimeStart: LLMAtom.work_hours.restTimeStart,
-        restTimeEnd: LLMAtom.work_hours.restTimeEnd,
-        deal: LLMAtom.work_hours.deal,
-        detail: LLMAtom.work_hours.detail,
-      },
-      place: LLMAtom.place,
-      endPayType: LLMAtom.endPayType,
-      socialEnsurance: LLMAtom.socialEnsurance,
+      // experience: LLMAtom.experience,
+      // expStart: LLMAtom.expStart,
+      // expEnd: LLMAtom.expEnd,
+      // employment_type: LLMAtom.employment_type,
+      // work_hours: {
+      //   work_hours_per_week: LLMAtom.work_hours.work_hours_per_week,
+      //   start: LLMAtom.work_hours.start,
+      //   end: LLMAtom.work_hours.end,
+      //   restTimeStart: LLMAtom.work_hours.restTimeStart,
+      //   restTimeEnd: LLMAtom.work_hours.restTimeEnd,
+      //   deal: LLMAtom.work_hours.deal,
+      //   detail: LLMAtom.work_hours.detail,
+      // },
+      // place: LLMAtom.place,
+      // endPayType: LLMAtom.endPayType,
+      // socialEnsurance: LLMAtom.socialEnsurance,
 
-      recruitmentType: LLMAtom.recruitmentType,
-      recruitmentDocsType: LLMAtom.recruitmentDocsType,
+      // recruitmentType: LLMAtom.recruitmentType,
+      // recruitmentDocsType: LLMAtom.recruitmentDocsType,
     },
   });
 
@@ -68,7 +66,7 @@ const JobPostingDraft = () => {
   const handleCopyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      alert("copied");
+      alert("복사되었습니다.");
     } catch (e) {
       alert("copy failed");
     }
@@ -80,12 +78,17 @@ const JobPostingDraft = () => {
     setLLMAtom((prev) => ({
       ...prev,
       job_title: reqData.job_title,
+      recommended_occupation_main: reqData.recommended_occupation_main,
+      recommended_occupation_sub: reqData.recommended_occupation_sub,
       recommended_job: reqData.recommended_job,
-      recommended_category: reqData.recommended_category,
-      category_keywords: reqData.category_keywords,
+
       job_intro: reqData.job_intro,
       main_tasks: reqData.main_tasks,
       preferred_qualifications: reqData.preferred_qualifications,
+      search_keywords: reqData.search_keywords,
+
+      recommended_category: reqData.recommended_category,
+      category_keywords: reqData.category_keywords,
 
       experience: reqData.experience,
       expStart: reqData.expStart,
@@ -157,7 +160,7 @@ const JobPostingDraft = () => {
           <table className={jobPostingStyles.table}>
             <tbody className={jobPostingStyles.tbodyStyle}>
               <tr className={jobPostingStyles.trStyle}>
-                <td className={jobPostingStyles.label}>채용 제목</td>
+                <td className={jobPostingStyles.label}>채용제목</td>
                 <td className={jobPostingStyles.copyWrapper}>
                   <input
                     className={jobPostingStyles.input}
@@ -174,7 +177,46 @@ const JobPostingDraft = () => {
                 </td>
               </tr>
               <tr className={jobPostingStyles.trStyle}>
-                <td className={jobPostingStyles.label}>추천 직무</td>
+                <td className={jobPostingStyles.label}>모집직종</td>
+                <td className={jobPostingStyles.copyWrapper}>
+                  <input
+                    className={jobPostingStyles.input}
+                    type="text"
+                    {...register("recommended_occupation_main")}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.recommended_occupation_main)
+                    }
+                    className={jobPostingStyles.copyBtn}
+                  >
+                    복사하기
+                  </button>
+                </td>
+              </tr>
+              <tr className={jobPostingStyles.trStyle}>
+                <td className={jobPostingStyles.label}>관련직종</td>
+                <td className={jobPostingStyles.copyWrapper}>
+                  <input
+                    className={jobPostingStyles.input}
+                    type="text"
+                    {...register("recommended_occupation_sub")}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.recommended_occupation_sub)
+                    }
+                    className={jobPostingStyles.copyBtn}
+                  >
+                    복사하기
+                  </button>
+                </td>
+              </tr>
+
+              <tr className={jobPostingStyles.trStyle}>
+                <td className={jobPostingStyles.label}>모집직무</td>
                 <td className={jobPostingStyles.copyWrapper}>
                   <input
                     className={jobPostingStyles.input}
@@ -193,46 +235,7 @@ const JobPostingDraft = () => {
                 </td>
               </tr>
               <tr className={jobPostingStyles.trStyle}>
-                <td className={jobPostingStyles.label}>추천 직종</td>
-                <td className={jobPostingStyles.copyWrapper}>
-                  <input
-                    className={jobPostingStyles.input}
-                    type="text"
-                    {...register("recommended_category")}
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleCopyText(watchAllFields.recommended_category)
-                    }
-                    className={jobPostingStyles.copyBtn}
-                  >
-                    복사하기
-                  </button>
-                </td>
-              </tr>
-
-              <tr className={jobPostingStyles.trStyle}>
-                <td className={jobPostingStyles.label}>직종 키워드</td>
-                <td className={jobPostingStyles.copyWrapper}>
-                  <input
-                    className={jobPostingStyles.input}
-                    type="text"
-                    {...register("category_keywords")}
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleCopyText(watchAllFields.category_keywords)
-                    }
-                    className={jobPostingStyles.copyBtn}
-                  >
-                    복사하기
-                  </button>
-                </td>
-              </tr>
-              <tr className={jobPostingStyles.trStyle}>
-                <td className={jobPostingStyles.label}>직무 소개</td>
+                <td className={jobPostingStyles.label}>직무소개</td>
                 <td className={jobPostingStyles.copyWrapperAlignStart}>
                   <textarea
                     className={jobPostingStyles.textarea}
@@ -279,6 +282,25 @@ const JobPostingDraft = () => {
                       handleCopyText(watchAllFields.preferred_qualifications)
                     }
                     className={jobPostingStyles.copyBtnWithMargin}
+                  >
+                    복사하기
+                  </button>
+                </td>
+              </tr>
+              <tr className={jobPostingStyles.trStyle}>
+                <td className={jobPostingStyles.label}>직무키워드</td>
+                <td className={jobPostingStyles.copyWrapper}>
+                  <input
+                    className={jobPostingStyles.input}
+                    type="text"
+                    {...register("search_keywords")}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCopyText(watchAllFields.search_keywords)
+                    }
+                    className={jobPostingStyles.copyBtn}
                   >
                     복사하기
                   </button>

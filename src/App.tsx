@@ -6,13 +6,9 @@ import { BeatLoader } from "react-spinners";
 import * as styles from "./app.css";
 import { resultAtom } from "./atom/atom";
 const App = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
-  const [LLMAtom, setLLMAtom] = useAtom(resultAtom);
+  const [, setLLMAtom] = useAtom(resultAtom);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -46,56 +42,9 @@ const App = () => {
       navigate("/jobPosting");
     } catch (error) {
       setIsLoading(false);
-      alert(`Error: ${error.message}`);
+      alert(`Error`);
     }
-
-    //   try {
-    //     setIsLoading(true);
-
-    //     const response = await fetch(
-    //       "http://222.109.225.98:7878/generate-job-posting",
-    //       {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(reqData),
-    //       }
-    //     );
-
-    //     const data = await response.json();
-
-    //     setIsLoading(false);
-
-    //     // setLLMAtom(data);
-    //     setLLMAtom((prev) => ({
-    //       ...prev,
-    //       ...data,
-    //     }));
-    //     navigate("/jobPosting");
-    //   } catch (error) {
-    //     alert(error);
-    //     // console.log(error);
-    //     // console.log("에러핸들링" + JSON.stringify(error));
-    //   }
   };
-
-  // if (isLoading)
-  //   return (
-  //     <div
-  //       style={{
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //         width: "100vw",
-  //         height: "100vh",
-  //       }}
-  //     >
-  //       <h2>잠시만 기다려주세요</h2>
-  //       <BeatLoader />
-  //     </div>
-  //   );
 
   return (
     <div className={styles.appWrapper}>
