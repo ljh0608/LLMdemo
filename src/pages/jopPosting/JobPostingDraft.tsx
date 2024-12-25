@@ -73,8 +73,6 @@ const JobPostingDraft = () => {
   };
 
   const updateInfo = (reqData: any) => {
-    console.log(reqData);
-
     setLLMAtom((prev) => ({
       ...prev,
       job_title: reqData.job_title,
@@ -87,46 +85,46 @@ const JobPostingDraft = () => {
       preferred_qualifications: reqData.preferred_qualifications,
       search_keywords: reqData.search_keywords,
 
-      recommended_category: reqData.recommended_category,
-      category_keywords: reqData.category_keywords,
+      // recommended_category: reqData.recommended_category,
+      // category_keywords: reqData.category_keywords,
 
-      experience: reqData.experience,
-      expStart: reqData.expStart,
-      expEnd: reqData.expEnd,
-      education1: reqData.education1,
-      education2: reqData.education2,
-      // wage_type: "",
-      wage: {
-        wage_type: reqData.wage.wage_type,
-        wage_low: reqData.wage.wage_low,
-        wage_high: reqData.wage.wage_high,
-        deal: reqData.wage.deal,
-        etc: {
-          type: reqData.wage.etc.type,
-          percent: reqData.wage.etc.percent,
-        },
-      },
+      // experience: reqData.experience,
+      // expStart: reqData.expStart,
+      // expEnd: reqData.expEnd,
+      // education1: reqData.education1,
+      // education2: reqData.education2,
+      // // wage_type: "",
+      // wage: {
+      //   wage_type: reqData.wage.wage_type,
+      //   wage_low: reqData.wage.wage_low,
+      //   wage_high: reqData.wage.wage_high,
+      //   deal: reqData.wage.deal,
+      //   etc: {
+      //     type: reqData.wage.etc.type,
+      //     percent: reqData.wage.etc.percent,
+      //   },
+      // },
 
-      employment_type: reqData.employment_type,
+      // employment_type: reqData.employment_type,
 
-      work_hours: {
-        work_hours_per_week: reqData.work_hours.work_hours_per_week,
-        start: reqData.work_hours.start,
-        end: reqData.work_hours.end,
-        restTimeStart: reqData.work_hours.restTimeStart,
-        restTimeEnd: reqData.work_hours.restTimeEnd,
-        deal: reqData.work_hours.deal,
-        detail: reqData.work_hours.detail,
-      },
-      place: reqData.place,
-      endPayType: reqData.endPayType,
-      socialEnsurance: reqData.socialEnsurance,
-      employmentType: reqData.employmentType,
-      recruitmentType: reqData.recruitmentType,
-      recruitmentDocsType: reqData.recruitmentDocsType,
+      // work_hours: {
+      //   work_hours_per_week: reqData.work_hours.work_hours_per_week,
+      //   start: reqData.work_hours.start,
+      //   end: reqData.work_hours.end,
+      //   restTimeStart: reqData.work_hours.restTimeStart,
+      //   restTimeEnd: reqData.work_hours.restTimeEnd,
+      //   deal: reqData.work_hours.deal,
+      //   detail: reqData.work_hours.detail,
+      // },
+      // place: reqData.place,
+      // endPayType: reqData.endPayType,
+      // socialEnsurance: reqData.socialEnsurance,
+      // employmentType: reqData.employmentType,
+      // recruitmentType: reqData.recruitmentType,
+      // recruitmentDocsType: reqData.recruitmentDocsType,
     }));
 
-    navigate("/preview");
+    // navigate("/preview");
   };
 
   return (
@@ -144,9 +142,9 @@ const JobPostingDraft = () => {
           >
             생성결과
           </li>
-          <li className={styles.navItem} onClick={() => navigate("/preview")}>
+          {/* <li className={styles.navItem} onClick={() => navigate("/preview")}>
             미리보기
-          </li>
+          </li> */}
         </ul>
       </nav>
       <div>
@@ -390,9 +388,9 @@ const JobPostingDraft = () => {
             </tbody>
           </table>
 
-          <button className={jobPostingStyles.btnStyle} type="submit">
+          {/* <button className={jobPostingStyles.btnStyle} type="submit">
             미리보기
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

@@ -63,11 +63,11 @@ const App = () => {
             className={styles.navItem}
             onClick={() => navigate("/jobPosting")}
           >
-            초안수정
+            생성결과
           </li>
-          <li className={styles.navItem} onClick={() => navigate("/preview")}>
+          {/* <li className={styles.navItem} onClick={() => navigate("/preview")}>
             미리보기
-          </li>
+          </li> */}
         </ul>
       </nav>
       <div>
